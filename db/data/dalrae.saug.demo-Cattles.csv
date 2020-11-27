@@ -1,4 +1,4 @@
-ID;paddock_ID;name;gender;
+ID;paddock_ID;cattleName;gender_code;
 4d73f359-6182-4612-a8ad-8bedcfa77e88;8caf60df-618b-4abe-861f-ea52f39d5eff;Cow 1;F
 520e26dc-be7b-48c2-85e3-b14013c25f3a;8caf60df-618b-4abe-861f-ea52f39d5eff;Cow 2;F
 e517ca1b-0c92-4306-9502-736f5e429f58;8caf60df-618b-4abe-861f-ea52f39d5eff;Cow 3;F

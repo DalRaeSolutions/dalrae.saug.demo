@@ -10,6 +10,8 @@ module.exports = (srv) => {
     const { location, acres, maxCattle } = req.data;
 
     if (!location) req.error(400, `'location' is a mandatory field`);
+    if (!acres) req.error(400, `'acres' is a mandatory field`);
+    if (!maxCattle) req.error(400, `'maxCattle' is a mandatory field`);
   });
 
   srv.after(['READ', 'EDIT'], Paddocks, async (paddocks, req) => {

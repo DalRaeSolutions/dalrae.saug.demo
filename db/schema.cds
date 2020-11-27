@@ -7,11 +7,16 @@ entity Paddocks : managed, cuid {
   acres: Integer;
   maxCattle: Integer;
   virtual numberOfCattle : Integer;
-  cattles: Composition of many Cattles on cattles.paddock = $self;
+  cattles: Association to many Cattles on cattles.paddock = $self;
 }
 
 entity Cattles : managed, cuid {
-  name: String(20);
-  gender: String(1);
+  cattleName: String(20);
+  gender: Association to Gender;
   paddock: Association to Paddocks;
+}
+
+@cds.odata.valuelist
+entity Gender : sap.common.CodeList {
+  key code : String(1);
 }
