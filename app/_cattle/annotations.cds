@@ -1,1 +1,0 @@
-using CattleService as service from '../../srv/cattle-service';
