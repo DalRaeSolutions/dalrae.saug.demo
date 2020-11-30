@@ -1,13 +1,16 @@
 {
-  "_version": "1.8.0",
+  "_version": "1.15.0",
   "sap.app": {
-    "id": "admin",
+    "id": "dalrae.saug.demo.cattle",
     "type": "application",
-    "title": "Manage Cattles",
-    "description": "Sample Application",
     "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "1.0.0"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
     "dataSources": {
-      "CattleService": {
+      "mainService": {
         "uri": "/cattle/",
         "type": "OData",
         "settings": {
@@ -15,16 +18,38 @@
         }
       }
     },
-    "-sourceTemplate": {
-      "id": "ui5template.basicSAPUI5ApplicationProject",
-      "-id": "ui5template.smartTemplate",
-      "-version": "1.40.12"
+    "offline": false,
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "ui5template.fiorielements.v4.lrop",
+      "version": "1.0.0"
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
     }
   },
   "sap.ui5": {
+    "resources": {
+      "js": [],
+      "css": []
+    },
     "dependencies": {
+      "minUI5Version": "1.76.0",
       "libs": {
-       
+        "sap.fe.templates": {}
       }
     },
     "models": {
@@ -33,17 +58,13 @@
         "uri": "i18n/i18n.properties"
       },
       "": {
-        "dataSource": "CattleService",
+        "dataSource": "mainService",
+        "preload": true,
         "settings": {
           "synchronizationMode": "None",
           "operationMode": "Server",
           "autoExpandSelect": true,
-          "earlyRequests": true,
-          "groupProperties": {
-            "default": {
-              "submit": "Auto"
-            }
-          }
+          "earlyRequests": true
         }
       }
     },
@@ -56,13 +77,13 @@
         },
         {
           "pattern": "Cattles({key}):?query:",
-          "name": "CattlesDetails",
-          "target": "CattlesDetails"
+          "name": "CattlesObjectPage",
+          "target": "CattlesObjectPage"
         },
         {
-          "pattern": "Cattles({key}/paddock({key2}):?query:",
-          "name": "PaddocksDetails",
-          "target": "PaddocksDetails"
+          "pattern": "Cattles({key})/locations({key2}):?query:",
+          "name": "LocationsObjectPage",
+          "target": "LocationsObjectPage"
         }
       ],
       "targets": {
@@ -73,40 +94,41 @@
           "options": {
             "settings": {
               "entitySet": "Cattles",
+              "variantManagement": "Page",
               "navigation": {
                 "Cattles": {
                   "detail": {
-                    "route": "CattlesDetails"
+                    "route": "CattlesObjectPage"
                   }
                 }
               }
             }
           }
         },
-        "CattlesDetails": {
+        "CattlesObjectPage": {
           "type": "Component",
-          "id": "CattlesDetailsList",
+          "id": "CattlesObjectPage",
           "name": "sap.fe.templates.ObjectPage",
           "options": {
             "settings": {
               "entitySet": "Cattles",
               "navigation": {
-                "Paddocks": {
+                "locations": {
                   "detail": {
-                    "route": "PaddocksDetails"
+                    "route": "LocationsObjectPage"
                   }
                 }
               }
             }
           }
         },
-        "PaddocksDetails": {
+        "LocationsObjectPage": {
           "type": "Component",
-          "id": "PaddocksDetailsList",
+          "id": "LocationsObjectPage",
           "name": "sap.fe.templates.ObjectPage",
           "options": {
             "settings": {
-              "entitySet": "Paddocks"
+              "entitySet": "Locations"
             }
           }
         }
@@ -117,11 +139,16 @@
       "cozy": true
     }
   },
-  "sap.ui": {
-    "technology": "UI5",
-    "fullWidth": false
+  "sap.platform.abap": {
+    "_version": "1.1.0",
+    "uri": ""
+  },
+  "sap.platform.hcp": {
+    "_version": "1.1.0",
+    "uri": ""
   },
   "sap.fiori": {
+    "_version": "1.1.0",
     "registrationIds": [],
     "archeType": "transactional"
   }

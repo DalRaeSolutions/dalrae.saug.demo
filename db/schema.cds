@@ -8,15 +8,24 @@ entity Paddocks : managed, cuid {
   maxCattle: Integer;
   virtual numberOfCattle : Integer;
   cattles: Association to many Cattles on cattles.paddock = $self;
+  locations: Association to many Locations on locations.paddock = $self;
 }
 
 entity Cattles : managed, cuid {
   cattleName: String(20);
   gender: Association to Gender;
   paddock: Association to Paddocks;
+  virtual url : String;
+  locations: Association to many Locations on locations.cattle = $self;
 }
 
 @cds.odata.valuelist
 entity Gender : sap.common.CodeList {
   key code : String(1);
+}
+
+entity Locations : managed, cuid {
+  timestamp : DateTime default $now;
+  cattle: Association to Cattles;
+  paddock: Association to Paddocks;
 }

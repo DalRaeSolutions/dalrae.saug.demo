@@ -30,7 +30,7 @@ describe('CattleService', () => {
         ['c1803f38-9fd7-4485-bc03-adf48ad9a7ee', 'West', 750, 3]
       )),
       cds.run(INSERT.into('dalrae.saug.demo.Cattles').columns(
-        'ID', 'paddock_ID', 'name', 'gender'
+        'ID', 'paddock_ID', 'cattleName', 'gender_code'
       ).rows(
         ['4d73f359-6182-4612-a8ad-8bedcfa77e88', '8caf60df-618b-4abe-861f-ea52f39d5eff', 'Cow 1', 'F'],
         ['520e26dc-be7b-48c2-85e3-b14013c25f3a', '8caf60df-618b-4abe-861f-ea52f39d5eff', 'Cow 2', 'F'],
@@ -49,8 +49,8 @@ describe('CattleService', () => {
   it('has the correct entities', async () => {
     const result = await request(app).get('/cattle');
 
-    expect(result.body.value).toContainEqual({ name: "Paddocks", url: "Paddocks" });
-    expect(result.body.value).toContainEqual({ name: "Cattles", url: "Cattles" });
+    expect(result.body.value).toContainEqual({ cattleName: "Paddocks", url: "Paddocks" });
+    expect(result.body.value).toContainEqual({ cattleName: "Cattles", url: "Cattles" });
     expect(result.body.value.length).toEqual(2);
   })
 

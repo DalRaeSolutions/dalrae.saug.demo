@@ -20,7 +20,7 @@ annotate schema.Paddocks with @(
 }
 
 @cds.odata.valuelist
-@sap.semantics: 'fixed-values'
+@sap.semantics: #fixedvalues
 annotate schema.Cattles with @(
   Common.SemanticKey: [cattleName]
 ) {
@@ -31,7 +31,7 @@ annotate schema.Cattles with @(
 };
 
 @cds.odata.valuelist
-@sap.semantics: 'fixed-values'
+@sap.semantics: #FIXED_VALUES 
 annotate schema.Gender with @(
 	Common.SemanticKey: [descr],
 	Identification: [{Value:code}],
@@ -45,4 +45,21 @@ annotate schema.Gender with @(
 ) {
 	code @title : '{i18n>GenderCode}' @UI.Common.Label: '{i18n>GenderCode}';
 	descr @title : '{i18n>GenderDescr}' @UI.Common.Label: '{i18n>GenderDescr}';
+};
+
+@cds.odata.valuelist
+@sap.semantics: #FIXED_VALUES 
+annotate schema.Occupancy with @(
+	Common.SemanticKey: [descr],
+	Identification: [{Value:code}],
+	UI: {
+		SelectionFields: [ code, descr ],
+		LineItem:[
+			{Value: code,},
+			{Value: descr },
+		],
+	}
+) {
+	code @title : '{i18n>Occupancy}' @UI.Common.Label: '{i18n>Occupancy}';
+	descr @title : '{i18n>Occupancy}' @UI.Common.Label: '{i18n>Occupancy}';
 };

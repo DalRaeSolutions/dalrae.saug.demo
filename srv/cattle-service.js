@@ -4,22 +4,15 @@
  * @param {cds.Service} srv 
  */
 module.exports = (srv) => {
-  const { Paddocks, Cattles } = srv.entities;
+  const { Cattles, Locations } = srv.entities;
 
-  srv.before(['CREATE', 'UPDATE', 'EDIT'], Paddocks, async req => {
-    const { location, acres, maxCattle } = req.data;
+  srv.before(['CREATE', 'UPDATE'], Cattles, async req => {
+    const { cattleName, ID: cattle_ID, paddock_ID } = req.data;
 
-    if (!location) req.error(400, `'location' is a mandatory field`);
-    if (!acres) req.error(400, `'acres' is a mandatory field`);
-    if (!maxCattle) req.error(400, `'maxCattle' is a mandatory field`);
+    if (!cattleName) req.error(400, `'cattleName' is a mandatory field`);
+    if(!(cattle_ID && paddock_ID)) return;
+    await cds.transaction(req).run(
+      INSERT.into(Locations).entries([{cattle_ID, paddock_ID}])
+    );
   });
-
-  srv.after(['READ', 'EDIT'], Paddocks, async (paddocks, req) => {
-    const paddocksByID = paddocks.reduce((all, o) => { (all[o.ID] = o).numberOfCattle = 0; return all }, {});
-    const query = SELECT.from(Cattles).columns('paddock_ID', 'count(paddock_ID)')
-      .where({ paddock_ID: { in: Object.keys(paddocksByID) } })
-      .groupBy('paddock_ID');
-
-    return cds.transaction(req).run(query).then(cattles => cattles.forEach(cattle => paddocksByID[cattle.paddock_ID].numberOfCattle = cattle[ 'count ( paddock_ID )']))
-  })
 };

@@ -1,0 +1,4 @@
+code;name;descr;severity
+1;Under capacity;Under capacity;1
+2;At capacity;At capacity;2
+3;Over capacity;Over capacity;3
