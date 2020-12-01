@@ -24,15 +24,9 @@
   },
   "sapux": [
     "app/cattle",
-    "app/paddocks",
-    "app/cattle"
+    "app/paddocks"
   ],
   "cds": {
-    "requires": {
-      "db": {
-        "kind": "sqlite",
-        "model": "*"
-      }
-    }
+
   }
 }
