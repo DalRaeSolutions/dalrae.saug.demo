@@ -6,14 +6,6 @@
 module.exports = (srv) => {
   const { Paddocks, Cattles, Locations } = srv.entities;
 
-  srv.after('READ', Cattles, async data => {
-    data.map(d => { 
-      
-      if(d.paddock) d.paddock.url = `#Paddocks-manage?ID=${d.paddock.ID}`;
-      return d
-    })
-  })
-
   srv.before(['CREATE', 'UPDATE'], Paddocks, async req => {
     const { location, acres, maxCattle } = req.data;
 

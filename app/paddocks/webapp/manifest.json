@@ -80,11 +80,11 @@
                     "name": "PaddocksObjectPage",
                     "target": "PaddocksObjectPage"
                 },
-                    {
-                        "pattern": "Paddocks({key})/cattles({key2}):?query:",
-                        "name": "CattlesObjectPage",
-                        "target": "CattlesObjectPage"
-                    }
+                {
+                    "pattern": "Paddocks({key})/cattles({key2}):?query:",
+                    "name": "CattlesObjectPage",
+                    "target": "CattlesObjectPage"
+                }
             ],
             "targets": {
                 "PaddocksList": {
@@ -101,6 +101,9 @@
                                         "route": "PaddocksObjectPage"
                                     }
                                 }
+                            },
+                            "controlConfiguration": {
+                                "@com.sap.vocabularies.UI.v1.LineItem": {}
                             }
                         }
                     }
@@ -112,26 +115,27 @@
                     "options": {
                         "settings": {
                             "entitySet": "Paddocks",
-                                "navigation": {
-                                    "cattles": {
-                                        "detail": {
-                                            "route": "CattlesObjectPage"
-                                        }
+                            "navigation": {
+                                "cattles": {
+                                    "detail": {
+                                        "route": "CattlesObjectPage"
                                     }
                                 }
-                        }
-                    }
-                },
-                    "CattlesObjectPage": {
-                        "type": "Component",
-                        "id": "CattlesObjectPage",
-                        "name": "sap.fe.templates.ObjectPage",
-                        "options": {
-                            "settings": {
-                                "entitySet": "Cattles"
                             }
                         }
                     }
+                },
+                "CattlesObjectPage": {
+                    "type": "Component",
+                    "id": "CattlesObjectPage",
+                    "name": "sap.fe.templates.ObjectPage",
+                    "options": {
+                        "settings": {
+                            "entitySet": "Cattles",
+                            "navigation": {}
+                        }
+                    }
+                }
             }
         },
         "contentDensities": {

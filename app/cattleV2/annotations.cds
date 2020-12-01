@@ -2,9 +2,8 @@ using CattleService as service from '../../srv/cattle-service';
 
 @odata.draft.enabled
 annotate service.Cattles with @(
-	Common.SemanticKey: [cattleName],
 	UI: {
-		SelectionFields: [ cattleName, paddock_ID ],
+		SelectionFields: [ cattleName ],
 		Identification: [{Value:cattleName}],
 		LineItem: [
 			{Value: cattleName, Label: 'Name'},
@@ -28,22 +27,23 @@ annotate service.Cattles with @(
 		},
 		Facets: [
 			{$Type: 'UI.ReferenceFacet', Label: '{i18n>General}', Target: '@UI.FieldGroup#General'},
+			{$Type: 'UI.ReferenceFacet', Label: '{i18n>Paddock}', Target: '@UI.FieldGroup#Paddock'},
 			{$Type: 'UI.ReferenceFacet', Label: '{i18n>LocationHistory}', Target: 'locations/@UI.LineItem'},
 			{$Type: 'UI.ReferenceFacet', Label: '{i18n>Admin}', Target: '@UI.FieldGroup#Admin'},
 		],
 		FieldGroup#General: {
 			Data: [
+				{Value: cattleName, Label: 'Name'},
 				{Value: gender_code},
-				{Value: paddock_ID}
 			]
 		},
-		// FieldGroup#Paddock: {
-		// 	Data: [
-		// 		{Value: paddock_ID},
-		// 		//{Value: paddock.maxCattle},
-		// 		//{Value: paddock.numberOfCattle, Label: '{i18n>NumberOfCattle}'},
-		// 	]
-		// },
+		FieldGroup#Paddock: {
+			Data: [
+				{Value: paddock_ID},
+				//{Value: paddock.maxCattle},
+				//{Value: paddock.numberOfCattle, Label: '{i18n>NumberOfCattle}'},
+			]
+		},
 		FieldGroup#Admin: {
 			Data: [
 				{Value: createdBy},
@@ -57,7 +57,7 @@ annotate service.Cattles with @(
 	cattleName @title: 'Name';
 	gender @title: '{i18n>Gender}' @sap.semantics: 'fixed-values' @Common: { Text: gender.descr,  TextArrangement: #TextOnly };
 	paddock @ValueList: { entity:'Paddocks', type: #fixed } @title: '{i18n>Paddock}' @sap.semantics: 'fixed-values' @Common: { Text: paddock.location,  TextArrangement: #TextOnly };
-	paddock_ID @ValueList: { entity:'Paddocks' } @title: '{i18n>Paddock}' @sap.semantics: 'fixed-values';
+	paddock_ID @ValueList: { entity:'Paddocks', type: #fixed } @title: '{i18n>Paddock}' @sap.semantics: 'fixed-values';
 };
 
 annotate service.Paddocks with @(
@@ -66,7 +66,6 @@ annotate service.Paddocks with @(
 	UI: {
 			LineItem: [
 			{Value: location},
-			{Value: acres},
 		],	
 	}
 ) {

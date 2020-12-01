@@ -90,7 +90,6 @@
             "settings": {
               "entitySet": "Cattles",
               "variantManagement": "Page",
-              "allowDeepLinking": true,
               "navigation": {
                 "Cattles": {
                   "detail": {

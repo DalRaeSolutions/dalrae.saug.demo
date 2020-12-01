@@ -15,7 +15,7 @@ entity Cattles : managed, cuid {
   cattleName: String(20);
   gender: Association to Gender;
   paddock: Association to Paddocks;
-  virtual url : String;
+  virtual url: String;
   locations: Association to many Locations on locations.cattle = $self;
 }
 
@@ -29,3 +29,11 @@ entity Locations : managed, cuid {
   cattle: Association to Cattles;
   paddock: Association to Paddocks;
 }
+
+//example of XSUAA authorisations altering the queries performend
+// extend Paddocks with @(
+//   restrict: [
+//     { grant: 'READ', where: 'createdBy = $user' },
+//     { grant: 'WRITE', to: 'admin' }
+//   ]
+// );

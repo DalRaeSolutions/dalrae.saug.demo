@@ -20,11 +20,19 @@
     "start": "npx cds run",
     "watch": "npx cds watch",
     "test": "jest --testTimeout=2000 --detectOpenHandles --verbose",
-    "test:watch": "jest --testTimeout=2000 --watchAll --verbose --detectOpenHandles"
+    "test:watch": "jest --testTimeout=2000 --watchAll --verbose --silent --detectOpenHandles"
   },
   "sapux": [
     "app/cattle",
     "app/paddocks",
     "app/cattle"
-  ]
+  ],
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "sqlite",
+        "model": "*"
+      }
+    }
+  }
 }
