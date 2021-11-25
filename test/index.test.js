@@ -14,7 +14,7 @@ beforeAll(async () => {
 
 afterAll(async () => {
   await cds.disconnect()
-});
+})
 
 describe('CattleService', () => {
   beforeEach(async () => {
@@ -58,7 +58,6 @@ describe('CattleService', () => {
     expect(result.body.value.length).toEqual(5);
   });
 
-
   it('has metadata', async () => {
     const result = await request(app).get('/cattle/$metadata');
 
@@ -77,7 +76,7 @@ describe('CattleService', () => {
 
       expect(result.body.value).toContainEqual(
         expect.objectContaining({
-          ID: '4d73f359-6182-4612-a8ad-8bedcfa77e88', 
+          ID: '4d73f359-6182-4612-a8ad-8bedcfa77e88',
           paddock_ID: '8caf60df-618b-4abe-861f-ea52f39d5eff',
           cattleName: expect.any(String),
           gender_code: expect.any(String),
@@ -124,6 +123,5 @@ describe('CattleService', () => {
       expect(activation.statusCode).toEqual(400);
       expect(activation.body.error.message).toEqual("'cattleName' is a mandatory field")
     });
-
   });
-})
+});

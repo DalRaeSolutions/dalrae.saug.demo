@@ -30,6 +30,11 @@ annotate schema.Cattles with @(
 	gender_code @title: '{i18n>Gender}' @sap.semantics: 'fixed-values' @Common: { Text: gender.descr,  TextArrangement: #TextOnly };
 };
 
+annotate schema.Locations {
+	ID @title:'{i18n>ID}' @UI.HiddenFilter;
+	timestamp @title:'{i18n>Timestamp}' @UI.Common.Label: '{i18n>Timestamp}';
+};
+
 @cds.odata.valuelist
 @sap.semantics: #FIXED_VALUES 
 annotate schema.Gender with @(
@@ -45,21 +50,4 @@ annotate schema.Gender with @(
 ) {
 	code @title : '{i18n>GenderCode}' @UI.Common.Label: '{i18n>GenderCode}';
 	descr @title : '{i18n>GenderDescr}' @UI.Common.Label: '{i18n>GenderDescr}';
-};
-
-@cds.odata.valuelist
-@sap.semantics: #FIXED_VALUES 
-annotate schema.Occupancy with @(
-	Common.SemanticKey: [descr],
-	Identification: [{Value:code}],
-	UI: {
-		SelectionFields: [ code, descr ],
-		LineItem:[
-			{Value: code,},
-			{Value: descr },
-		],
-	}
-) {
-	code @title : '{i18n>Occupancy}' @UI.Common.Label: '{i18n>Occupancy}';
-	descr @title : '{i18n>Occupancy}' @UI.Common.Label: '{i18n>Occupancy}';
 };
