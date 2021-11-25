@@ -19,12 +19,23 @@
   "scripts": {
     "start": "npx cds run",
     "watch": "npx cds watch",
-    "test": "jest --testTimeout=10000 --detectOpenHandles --verbose",
-    "test:watch": "jest --testTimeout=2000 --watchAll --verbose --silent --detectOpenHandles"
+    "test": "jest --testTimeout=10000 --detectOpenHandles --verbose --collectCoverage",
+    "test:watch": "jest --testTimeout=2000 --watchAll --verbose --silent --detectOpenHandles --collectCoverage"
   },
   "sapux": [
     "app/cattle",
     "app/paddocks"
   ],
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "jsx",
+      "ts",
+      "tsx",
+      "node",
+      "cds"
+    ]
+  },
   "cds": {}
 }
